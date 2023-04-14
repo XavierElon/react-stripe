@@ -1,15 +1,29 @@
-import { loadStripe } from '@stripe/stripe-js'
-import { Elements } from '@stripe/react-stripe-js'
+import { useState } from 'react'
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import axios from 'axios'
 import dotenv from 'dotenv'
 
 dotenv.config()
 
 const PUBLIC_KEY: string = process.env.STRIPE_PUBLISHABLE_KEY || ''
 
-const stripeTestPromise = loadStripe(PUBLIC_KEY)
-
 const PaymentForm = () => {
-  return <Elements stripe={stripeTestPromise}></Elements>
+  const [success, setSuccess] = useState(false)
+  const stripe = useStripe()
+  const elements = useElements()
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+    const { error, paymentMethod } = await stripe?.createPaymentMethod({
+      type: 'card',
+      card: elements?.getElement(CardElement)!,
+    })
+    // await stripe?.createPaymentMethod({
+    //     type: 'card',
+    //     card: elements?.getElement(CardElement)!
+    // })
+  }
+  return <div></div>
 }
 
 export default PaymentForm
