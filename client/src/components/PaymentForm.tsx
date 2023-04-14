@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import axios from 'axios'
-import dotenv from 'dotenv'
 
-dotenv.config()
-
-const PUBLIC_KEY: string = process.env.STRIPE_PUBLISHABLE_KEY || ''
+interface Props {
+  error: any
+  paymentMethod: any
+}
 
 const PaymentForm = () => {
   const [success, setSuccess] = useState(false)
@@ -14,16 +14,40 @@ const PaymentForm = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    const { error, paymentMethod } = await stripe?.createPaymentMethod({
-      type: 'card',
-      card: elements?.getElement(CardElement)!,
-    })
-    // await stripe?.createPaymentMethod({
-    //     type: 'card',
-    //     card: elements?.getElement(CardElement)!
+    // const { error, paymentMethod } = await stripe?.createPaymentMethod({
+    //   type: 'card',
+    //   card: elements?.getElement(CardElement)!,
     // })
+
+    // if (!error) {
+    //     try {
+    //         const { id } = paymentMethod
+    //     }
+    // }
+    console.log('here')
+    await stripe
+      ?.createPaymentMethod({
+        type: 'card',
+        card: {
+          number: '4242424242424242',
+          exp_month: 12,
+          exp_year: 2023,
+          cvc: '123',
+        },
+      })
+      .then((result) => {
+        console.log(result)
+      })
+      .catch((error) => {
+        console.log('error')
+        console.log(error)
+      })
   }
-  return <div></div>
+  return (
+    <div>
+      <button onClick={handleSubmit}>Achilles</button>
+    </div>
+  )
 }
 
 export default PaymentForm
