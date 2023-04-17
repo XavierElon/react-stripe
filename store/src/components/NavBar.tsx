@@ -18,7 +18,9 @@ const NavBarComponent = () => {
         <Navbar.Brand href="/">Ecommerce Store</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          <Button onClick={handleShow}>Cart 0 Items</Button>
+          <Button onClick={handleShow} className="bg-blue-500">
+            Cart 0 Items
+          </Button>
         </Navbar.Collapse>
       </Navbar>
       <Modal show={show} onHide={handleClose}>

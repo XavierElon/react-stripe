@@ -1,14 +1,3 @@
-const getProductData = (id: number) => {
-    let productData = productsArray.find(product => product.id === id)
-
-    if (productData == undefined) {
-        console.log('Product data does not exist for ID ' + id)
-        return undefined
-    }
-
-    return productData
-}
-
 const productsArray = [
     {
         id: 1,
@@ -41,5 +30,16 @@ const productsArray = [
         price: '500'
     },
 ]
+
+const getProductData = (id: number) => {
+    let productData = productsArray.find(product => product.id === id)
+
+    if (productData === undefined) {
+        console.log('Product data does not exist for ID ' + id)
+        return undefined
+    }
+
+    return productData
+}
  
 export { productsArray, getProductData }
