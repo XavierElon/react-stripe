@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react'
+import { productsArray, getProductData } from '../productStore'
 
 type ContextInterface = {
   items: any
@@ -76,7 +77,14 @@ const CartStateProvider = (props: any) => {
     )
   }
 
-  const getTotalCost = (id: number) => {}
+  const getTotalCost = () => {
+    let totalCost = 0
+    cartProducts.map((cartItem: any) => {
+      const productData: any = getProductData(cartItem.id)
+      totalCost += productData.price * cartItem.quantity
+    })
+    return totalCost
+  }
 
   const contextValue = {
     items: cartProducts,
