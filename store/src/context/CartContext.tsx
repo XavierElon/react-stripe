@@ -54,7 +54,13 @@ const CartStateProvider = (props: any) => {
 
   const removeOneFromCart = (id: number) => {}
 
-  const deleteFromCart = (id: number) => {}
+  const deleteFromCart = (id: number) => {
+    setCartProducts((cartProducts) =>
+      cartProducts.filter((currentProduct) => {
+        return currentProduct.id != id
+      })
+    )
+  }
 
   const getTotalCost = (id: number) => {}
 
