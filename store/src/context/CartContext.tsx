@@ -52,7 +52,21 @@ const CartStateProvider = (props: any) => {
     }
   }
 
-  const removeOneFromCart = (id: number) => {}
+  const removeOneFromCart = (id: number) => {
+    const quantity = getProductQuantity(id)
+
+    if (quantity === 1) {
+      deleteFromCart(id)
+    } else {
+      setCartProducts(
+        cartProducts.map((product) => {
+          product.id === id
+            ? { ...product, quantity: product.quantity - 1 }
+            : product
+        })
+      )
+    }
+  }
 
   const deleteFromCart = (id: number) => {
     setCartProducts((cartProducts) =>
