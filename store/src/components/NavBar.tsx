@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, Container, Navbar, Modal } from 'react-bootstrap'
+import { CartStateContext } from '../context/CartContext'
 
 const NavBarComponent = () => {
   const [show, setShow] = useState(false)
+  const cart = useContext(CartStateContext)
 
   const handleClose = () => {
     setShow(false)
@@ -12,6 +14,11 @@ const NavBarComponent = () => {
     setShow(true)
   }
 
+  const productsCount = cart.items.reduce(
+    (sum: any, product: { quantity: any }) => sum + product.quantity,
+    0
+  )
+
   return (
     <>
       <Navbar expand="sm">
@@ -19,7 +26,7 @@ const NavBarComponent = () => {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Button onClick={handleShow} className="bg-blue-500">
-            Cart 0 Items
+            Cart {productsCount} Items
           </Button>
         </Navbar.Collapse>
       </Navbar>

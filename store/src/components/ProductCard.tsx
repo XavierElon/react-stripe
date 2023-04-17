@@ -11,7 +11,7 @@ const ProductCard = (props: Props) => {
 
   const cart = useContext(CartStateContext)
   const productQuantity = cart.getProductQuantity(product.id)
-  console.log(product.id)
+
   return (
     <Card>
       <Card.Body>
