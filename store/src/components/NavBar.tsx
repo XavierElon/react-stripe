@@ -15,11 +15,28 @@ const NavBarComponent = () => {
     setShow(true)
   }
 
+  const checkout = async () => {
+    await fetch('http://localhost:4000/checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ items: cart.items }),
+    })
+      .then((response) => {
+        return response.json()
+      })
+      .then((response) => {
+        if (response.url) {
+          window.location.assign(response.url)
+        }
+      })
+  }
+
   const productsCount = cart.items.reduce(
     (sum: any, product: { quantity: any }) => sum + product.quantity,
     0
   )
-  console.log(productsCount)
 
   return (
     <>
@@ -42,7 +59,7 @@ const NavBarComponent = () => {
               <p>Items in your cart: </p>
               {cart.items.map(
                 (
-                  currentProduct: { id: number; quantity: number },
+                  currentProduct: { id: string; quantity: number },
                   idx: any
                 ) => (
                   <CartProduct
@@ -62,7 +79,11 @@ const NavBarComponent = () => {
             Total: {cart.getTotalCost().toFixed(2)}
           </h1>
           <div className="flex flex-col items-center justify-center py-3">
-            <Button variant="success" className="bg-green-600">
+            <Button
+              variant="success"
+              className="bg-green-600"
+              onClick={checkout}
+            >
               Purchase items!
             </Button>
           </div>

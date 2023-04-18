@@ -5,7 +5,7 @@ import { getProductData } from '../productStore'
 import React from 'react'
 
 interface CartProductProps {
-  id: number
+  id: string
   quantity: number
 }
 

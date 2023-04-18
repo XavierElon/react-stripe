@@ -1,43 +1,43 @@
 interface Product {
-    id: number,
+    id: string,
     title: string,
     price: number
 }
 
 const productsArray: Product[] = [
     {
-        id: 1,
+        id: 'price_1My1KPJrkE18sY2VqKkRfIdN',
         title: 'Achilles',
         price: 5
     },
     {
-        id: 2,
+        id: 'price_1My1LPJrkE18sY2Vkfqx99mJ',
         title: 'Flocka',
         price: 10
     },
     {
-        id: 3,
+        id: 'price_1My1LqJrkE18sY2VBudHbvik',
         title: 'Elon',
         price: 15
     },
     {
-        id: 4,
+        id: 'price_1My1MNJrkE18sY2VeFuO8tjI',
         title: 'XXX',
         price: 50
     },
     {
-        id: 5,
+        id: 'price_1My1MqJrkE18sY2VO1b37LPS',
         title: 'Bezos',
         price: 51
     },
     {
-        id: 6,
+        id: 'price_1My1NNJrkE18sY2VH98CVX45',
         title: 'Musk',
         price: 500
     },
 ]
 
-const getProductData = (id: number) => {
+const getProductData = (id: string) => {
     let productData = productsArray.find(product => product.id === id)
 
     if (productData === undefined) {
